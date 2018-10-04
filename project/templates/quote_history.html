@@ -6,12 +6,50 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css">
+
+    .w3-content.w3-top{
+        margin-top: 30px;
+        float: left;
+    }
+
+    footer {
+        position:absolute;
+        bottom:0;
+        width:100%;
+        height:250px;   /* Height of the footer */
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <title>Client Info</title>
     <link rel="stylesheet" href="header_footer.css">
 </head>
 <body>
+
+    <div class="w3-top">
+
+        <div class="w3-bar" id="myNavbar">
+            <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+                <i class="fa fa-bars"></i>
+            </a>
+            <a href="home" class="w3-bar-item w3-button">HOME</a>
+            <a href="#about" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> ABOUT</a>
+            <a href="#quote" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> REQUEST QUOTE</a>
+            <a href="client_info" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-address-card"></i> CLIENT INFORMATION</a>
+            <a href="quote_history" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-calendar"></i> QUOTE HISTORY</a>
+            <a href="#contact" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-envelope"></i> CONTACT</a>
+        </div>
+
+        <!-- Navbar on small screens -->
+        <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+            <a href="#about" class="w3-bar-item w3-button" onclick="toggleFunction()">ABOUT</a>
+            <a href="#quote" class="w3-bar-item w3-button" onclick="toggleFunction()">REQUEST QUOTE</a>
+            <a href="#history" class="w3-bar-item w3-button" onclick="toggleFunction()">QUOTE HISTORY</a>
+            <a href="#contact" class="w3-bar-item w3-button" onclick="toggleFunction()">CONTACT</a>
+            <a href="#" class="w3-bar-item w3-button">SEARCH</a>
+        </div>
+    </div>
 
 <!-- First Parallax Image with Logo Text -->
 <div class="bgimg-1-client" style="background-color:white">
@@ -39,6 +77,21 @@
                             <td> {{history1.rate}}</td>
                             <td> {{history1.total}}</td>
                         </tr>
+                        <tr>
+                            <td> {{history2.itemId}}</td>
+                            <td> {{history2.request}}</td>
+                            <td> {{history2.delivery}}</td>
+                            <td> {{history2.gallons}}</td>
+                            <td> {{history2.rate}}</td>
+                            <td> {{history2.total}}</td>
+                        </tr>
+                        <tr>
+                            <td> {{history3.itemId}}</td>
+                            <td> {{history3.request}}</td>
+                            <td> {{history3.delivery}}</td>
+                            <td> {{history3.gallons}}</td>
+                            <td> {{history3.rate}}</td>
+                            <td> {{history3.total}}</td>
                         </tr>
                     </table>
 
