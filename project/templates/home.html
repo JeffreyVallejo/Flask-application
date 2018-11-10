@@ -6,6 +6,13 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 <style>
     body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
     body, html {
@@ -53,7 +60,10 @@
     }
 
 </style>
+
+
 <body>
+
 
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
@@ -143,25 +153,31 @@
     <div class="w3-row w3-padding-32 w3-section">
         <div class="w3-col m8 w3-panel">
 
-            <form action="/action_page.php" target="_blank">
+            <form name="form" method="POST" action="" target="_blank">
                 <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
                     <div class="w3-wide">
-                        <input class="w3-input w3-border" type="text" placeholder="Gallons Requested" required name="Gallons">
-                        <input class="w3-input w3-border" type="text" placeholder="Delivery Date" required name="Delivery Date">
+                        <input id="clientId" class="w3-input w3-border" type="text" placeholder="client ID" name="client">
+                        <input id="gallons" class="w3-input w3-border" type="text" placeholder="Gallons Requested" name="gallons">
+                        <input id="date" class="w3-input w3-border" type="text" placeholder="Date of Request" name="reqDate">
+                        <input id="date" class="w3-input w3-border" type="text" placeholder="Date of Delivery" name="date">
+                        <input id="deliveryLocation" class="w3-input w3-border" type="text" placeholder="Address" name="address">
+                        <input id="deliveryLocation" class="w3-input w3-border" type="text" placeholder="City" name="city">
+                        <input id="deliveryLocation" class="w3-input w3-border" type="text" placeholder="State" name="state">
+                        <input id="deliveryLocation" class="w3-input w3-border" type="text" placeholder="Zip" name="zip">
                     </div>
 
                     <div class="w3-wide">
-                        <input class="w3-input w3-border" type="text" placeholder="Delivery Contact Person Name" required name="Delivery Contact Person Name">
-                        <input class="w3-input w3-border" type="text" placeholder="Delivery Contact Person Phone" required name="Delivery Contact Person Phone">
-                        <input class="w3-input w3-border" type="text" placeholder="Delivery Contact Person Email" required name="Delivery Contact Person Email">
+                        <input id="username" class="w3-input w3-border" type="text" placeholder="Contact Name" name="name">
+                        <input class="w3-input w3-border" type="text" placeholder="Contact Phone" name="phone">
+                        <input id="email" class="w3-input w3-border" type="text" placeholder="Contact Email" name="email">
                     </div>
                     <div class="w3-wide">
-                        <input class="w3-input w3-border" type="text" placeholder="Suggested Price per Gallon" required name="Suggested Price per Gallon">
-                        <input class="w3-input w3-border" type="text" placeholder="Total Amount Due" required name="Total Amount Due">
+                        <input class="w3-input w3-border" type="text" placeholder="Suggested Price per Gallon" name="rate">
+                        <input class="w3-input w3-border" type="text" placeholder="Total Amount Due" name="total">
                     </div>
                 </div>
 
-                <button class="w3-button w3-black w3-center w3-section" type="submit">
+                <button class="w3-button w3-black w3-center w3-section" type="submit" onclick="checkFields()">
                     <i class="fa fa-paper-plane"></i> SUBMIT
                 </button>
             </form>
@@ -277,6 +293,64 @@
         }
     }
 </script>
+<script>
+    var input_field = document.getElementById('gallons');
+    console.log("hello world")
+    input_field.addEventListener('change', function() {
+        var v = parseFloat(this.value);
+        if (isNaN(v)) {
+            this.value = '';
+        } else {
+            this.value = v.toFixed(2);
+        }
+    });
+
+    function checkFields() {
+        console.log("checkFields")
+        //checks for valid date entry
+        if (checkDate() == false){
+            alert('please enter the correct date format MM/DD/YYYY');
+        }
+        //checks for valid name entry
+        if (checkUserName() == false){
+            alert('please use alphabetic characters only')
+        }
+        //checks for valid Email entry
+        if (!checkEmail()){
+            alert('please use correct email format example@server.com')
+        }
+        return true;
+    }
+    function checkDate(){
+        console.log("checking date . . . . . .")
+        var x = document.getElementById("date")
+        var dateFormat = /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/;
+        if(x.value.match(dateFormat)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function checkUserName() {
+        console.log("checking username . . . . . .")
+        var username = document.getElementById("username").value;
+        var pattern = new RegExp(/[0-9()[\]{}*&^%$#@!]+/); 
+        if (pattern.test(username)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function checkEmail() {
+        console.log("checking Email . . . . . .")
+        var email = document.getElementById("email").value
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+
+</script>
+
 
 </body>
 </html>
